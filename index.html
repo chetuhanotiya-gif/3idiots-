@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3 Idiots Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#fafafa;
+}
+
+header{
+background:#d35400;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.item{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+background:#d35400;
+color:white;
+border:none;
+padding:10px;
+margin-top:10px;
+cursor:pointer;
+border-radius:5px;
+}
+
+.cart{
+background:#fff;
+padding:20px;
+margin:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+</style>
+
+<script>
+
+let cart=[];
+
+function addItem(name,price){
+
+cart.push({name,price});
+
+showCart();
+
+}
+
+function showCart(){
+
+let cartHTML="";
+let total=0;
+
+cart.forEach((item)=>{
+
+cartHTML+=item.name+" - ₹"+item.price+"<br>";
+total+=item.price;
+
+});
+
+document.getElementById("cartItems").innerHTML=cartHTML;
+document.getElementById("total").innerText=total;
+
+}
+
+function sendOrder(){
+
+let table=document.getElementById("table").value;
+
+let order="Table Number: "+table+"\n";
+
+cart.forEach((item)=>{
+
+order+=item.name+" ₹"+item.price+"\n";
+
+});
+
+window.location.href="mailto:chetuhanotiya@gmail.com?subject=Cafe Order&body="+encodeURIComponent(order);
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>3 Idiots Cafe</h1>
+
+<p>Haldighati Gate Jaipur</p>
+
+</header>
+
+<div class="menu">
+
+<div class="item">
+
+<h3>Pizza Small</h3>
+
+<p>₹120</p>
+
+<button onclick="addItem('Pizza Small',120)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Pizza Medium</h3>
+
+<p>₹150</p>
+
+<button onclick="addItem('Pizza Medium',150)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Pizza Large</h3>
+
+<p>₹190</p>
+
+<button onclick="addItem('Pizza Large',190)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Veg Burger</h3>
+
+<p>₹90</p>
+
+<button onclick="addItem('Veg Burger',90)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Honey Chilli Potato</h3>
+
+<p>₹130</p>
+
+<button onclick="addItem('Honey Chilli Potato',130)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Hakka Noodles</h3>
+
+<p>₹80</p>
+
+<button onclick="addItem('Hakka Noodles',80)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Cold Coffee Small</h3>
+
+<p>₹60</p>
+
+<button onclick="addItem('Cold Coffee Small',60)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Cold Coffee Medium</h3>
+
+<p>₹80</p>
+
+<button onclick="addItem('Cold Coffee Medium',80)">Add</button>
+
+</div>
+
+<div class="item">
+
+<h3>Cold Coffee Large</h3>
+
+<p>₹110</p>
+
+<button onclick="addItem('Cold Coffee Large',110)">Add</button>
+
+</div>
+
+</div>
+
+<div class="cart">
+
+<h2>Your Order</h2>
+
+<div id="cartItems"></div>
+
+<h3>Total ₹<span id="total">0</span></h3>
+
+<br>
+
+<label>Table Number:</label>
+
+<select id="table">
+
+<option>1</option>
+
+<option>2</option>
+
+<option>3</option>
+
+<option>4</option>
+
+<option>5</option>
+
+<option>6</option>
+
+</select>
+
+<br><br>
+
+<button onclick="sendOrder()">Place Order</button>
+
+</div>
+
+</body>
+
+</html>
